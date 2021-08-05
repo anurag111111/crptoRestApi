@@ -33,6 +33,6 @@ app.get('/',  (req, res) => {
   
  
   
-  app.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`);
-  }) 
+  app.listen(PORT || port, () => {
+    console.log("listening 8080...");
+  });
