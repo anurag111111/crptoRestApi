@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const router = express.Router();
-const crptodet = require('../models/schema');
+
+const cryptodet = require('../models/schema');
 //post:create 
 router.post('/',(req,res)=>{
     crypton = new cryptodet({
-        name:req.body.crypName,
-        symbol:req.body.cryoSymb,
-        price:req.body.priceAmt,
-        marketcap:req.body.markAmt,
-        change:req.body.chngeCryp
+        name:req.body.name,
+        symbol:req.body.symbol,
+        price:req.body.price,
+        marketcap:req.body.marketcap,
+        change:req.body.change
     });
 
-    crptodet.save().then(crptodet =>{
-        res,send(crptodet);
+    crypton.save().then(crypton =>{
+        res.send(crypton);
 
     }).catch(error =>{
         res.status(500).send("information regarding crypto was not saved in db");
