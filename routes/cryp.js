@@ -45,26 +45,28 @@ router.post('/', async (req,res)=>{
     });
 
     //UPDATE DATA BASED IN ID
-    router.put("/api/currency/:cryptoId", async (req,res) =>{
-    const updatedData = await cryptodet.findByIdAndUpdate(req.params.cryptoId,{
+    router.put("/:cryptoId", async (req,res) =>{
+    const updatedData = await cryptodet.findByIdAndUpdate({_id:req.params.cryptoId},{
         name:req.body.name,
         symbol:req.body.symbol,
         price:req.body.price,
         marketcap:req.body.marketcap,
         change:req.body.change
         
-    }
-    ,{new:ture});
+    });
     if(!updatedData) res.status(404).send("data not found");
     res.send(updatedData);
 
     });
 
     // //DELETE DATA BASED ON ID
-     router.delete("/api/currency/:cryptoId", async (req,res) =>{
-         const  crypton = await cryptodet.findByIdAndRemove(req.params.cryptoId);
-          if(!cypton) res.status(404).send("data not found");
-         res.send(crypton);
+     router.delete("/:cryptoId", async (req,res) =>{
+         await cryptodet.findByIdAndRemove({_id:req.params.cryptoId}).then(()=>{
+            res.send({msg:"deleted successfully"});
+         }).catch((err)=>{
+            console.log(err)
+            res.status(404).send("data not found");
+         });
      });
 
 
